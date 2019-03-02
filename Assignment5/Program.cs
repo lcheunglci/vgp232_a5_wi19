@@ -16,12 +16,11 @@ namespace Assignment5
             PokemonReader reader = new PokemonReader();
             Pokedex pokedex = reader.Load("pokemon151.xml");
             PokemonBag Bag = new PokemonBag();
+            Pokedex PokedexforBag = new Pokedex();
             // List out all the pokemons loaded
-            Pokemon ppokemon = new Pokemon();
-            ppokemon = pokedex.
+            
             foreach (Pokemon pokemon in pokedex.Pokemons)
             {
-
                 Console.WriteLine(pokemon.Name);
                 if(pokemon.Name == "Bulbasaur")
                 {
@@ -40,32 +39,28 @@ namespace Assignment5
                 {
                     Bag.Pokemons.Add(pokemon.Index);
                 }
-                
             }
-            
-            for (int i = 0; i < Bag.Pokemons.Count; i++)
-            {
-                Console.WriteLine("{0} added", Bag.Pokemons[i]);
-            }
+            // Check What pokemon has the highest point.
+            pokedex.GetHighestAttackPokemon();
+            pokedex.GetHighestDefensePokemon();
+            pokedex.GetHighestHPPokemon();
+            pokedex.GetHighestMaxCPPokemon();
+
             for (int i = 0; i < Bag.Pokemons.Count; i++)
             {
                 for (int f = 0; f < pokedex.Pokemons.Count; f++)
                 {
                     if(Bag.Pokemons[i] == pokedex.Pokemons[f].Index)
                     {
-                        Console.WriteLine(pokedex.Pokemons[f].Index);
-                        Console.WriteLine(pokedex.Pokemons[f].Name);
-                        Console.WriteLine(pokedex.Pokemons[f].HP);
-                        Console.WriteLine(pokedex.Pokemons[f].Attack);
-                        Console.WriteLine(pokedex.Pokemons[f].Defense);
-                        Console.WriteLine(pokedex.Pokemons[f].Type1);
-                        Console.WriteLine(pokedex.Pokemons[f].Type2);
-                        Console.WriteLine(pokedex.Pokemons[f].MaxCP);
+                        Console.WriteLine(pokedex.Pokemons[f].ToString());
+                        PokedexforBag.Pokemons.Add(pokedex.Pokemons[f]); // PokedexforBag is from the class of Pokedex
+                        Console.WriteLine("");
                     }
                 }
             }
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
+            reader.Save("pokemon152.xml", PokedexforBag);
             Console.ReadKey();
         }
     }

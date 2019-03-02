@@ -19,7 +19,7 @@ namespace Assignment5.Data
             Pokemons = new List<Pokemon>();
         }
 
-        Pokemon GetPokemonByIndex(int index)
+        public Pokemon GetPokemonByIndex(int index)
         {
             Pokemon poke = new Pokemon();
             for (int i = 0; i < Pokemons.Count; i++)
@@ -33,7 +33,7 @@ namespace Assignment5.Data
             return poke;
         }
 
-        Pokemon GetPokemonByName(string name)
+        public Pokemon GetPokemonByName(string name)
         {
             Pokemon poke = new Pokemon();
             for (int i = 0; i < Pokemons.Count; i++)
@@ -48,7 +48,7 @@ namespace Assignment5.Data
             return poke;
         }
 
-        List<Pokemon> GetPokemonsOfType(string type)
+        public List<Pokemon> GetPokemonsOfType(string type)
         {
             List<Pokemon> poke = new List<Pokemon>();
             // Note to check both Type1 and Type2
@@ -57,16 +57,18 @@ namespace Assignment5.Data
                 if(Pokemons[i].Type1 == type)
                 {
                     poke.Add(Pokemons[i]);
+                    Console.WriteLine(type);
                 }
                 if (Pokemons[i].Type2 == type)
                 {
                     poke.Add(Pokemons[i]);
+                    Console.WriteLine(type);
                 }
             }
             return poke;
         }
 
-        Pokemon GetHighestHPPokemon()
+        public Pokemon GetHighestHPPokemon()
         {
             Pokemon poke = new Pokemon();
             int Highest = 0;
@@ -85,7 +87,7 @@ namespace Assignment5.Data
             return poke;
         }
 
-        Pokemon GetHighestAttackPokemon()
+        public Pokemon GetHighestAttackPokemon()
         {
             Pokemon poke = new Pokemon();
             int Highest = 0;
@@ -104,7 +106,7 @@ namespace Assignment5.Data
             return poke;
         }
 
-        Pokemon GetHighestDefensePokemon()
+        public Pokemon GetHighestDefensePokemon()
         {
             Pokemon poke = new Pokemon();
             int Highest = 0;
@@ -123,7 +125,7 @@ namespace Assignment5.Data
             return poke;
         }
 
-        Pokemon GetHighestMaxCPPokemon()
+        public Pokemon GetHighestMaxCPPokemon()
         {
             Pokemon poke = new Pokemon();
             int Highest = 0;
