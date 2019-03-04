@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,10 @@ namespace Assignment5
         {
             Console.WriteLine("Welcome to Assignment 5 - Pokemon Edition");
             PokemonReader reader = new PokemonReader();
+            if (!File.Exists("pokemon151.xml"))
+            {
+                throw new Exception("File doesn't exist: pokemon151.xml");
+            }
             Pokedex pokedex = reader.Load("pokemon151.xml");
             PokemonBag Bag = new PokemonBag();
             Pokedex PokedexforBag = new Pokedex();
