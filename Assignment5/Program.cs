@@ -45,12 +45,13 @@ namespace Assignment5
                     Bag.Pokemons.Add(pokemon.Index);
                 }
             }
+            Console.WriteLine("");
             // Check What pokemon has the highest point.
             pokedex.GetHighestAttackPokemon();
             pokedex.GetHighestDefensePokemon();
             pokedex.GetHighestHPPokemon();
             pokedex.GetHighestMaxCPPokemon();
-
+            Console.WriteLine("");
             for (int i = 0; i < Bag.Pokemons.Count; i++)
             {
                 for (int f = 0; f < pokedex.Pokemons.Count; f++)
@@ -65,7 +66,7 @@ namespace Assignment5
             }
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
-            reader.Save("pokemon152.xml", PokedexforBag);
+            reader.Save("Mybag.xml", PokedexforBag);
             Console.ReadKey();
         }
     }

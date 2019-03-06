@@ -63,11 +63,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Mybag.xml" />
     <Content Include="pokemon151.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </Content>
-    <Content Include="pokemon152.xml">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
