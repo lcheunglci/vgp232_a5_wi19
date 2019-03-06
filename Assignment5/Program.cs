@@ -6,8 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
-
+    
 namespace Assignment5
 {
     class Program
@@ -16,44 +17,63 @@ namespace Assignment5
         {
             Console.WriteLine("Welcome to Assignment 5 - Pokemon Edition");
 
-            // TODO: load the pokemon151 xml
+            // load the itemData xml
+            string inputFile = "itemData.xml";
+            
+            ItemsData itemsData = new ItemsData();
+            ItemReader itemReader = new ItemReader();
+            Inventory inventory = new Inventory();
+            if (string.IsNullOrEmpty(inputFile))
+            {
+                //show message to user that input file path was not not specified
+                Console.WriteLine("input file path was not specified");
+            }
+            else if (!File.Exists((inputFile)))
+            {
+                //show message to user that the input file path does not exist
+                Console.WriteLine("input file path does not exist");
+            }
+            else
+            {
+                // add item to ItemReader
+                itemsData = itemReader.LoadFile(inputFile);
+            }
 
-            // TODO: Add item reader and print out all the items
 
-            // TODO: hook up item data to display with the inventory
+            // print out all the items nmae
+            Console.WriteLine("\nfollowing are the name of item: ");
+            foreach (Item item in itemsData.Items)
+            {
+                Console.WriteLine(item.Name);
+            }
 
+
+            // hook up item data to display with the inventory
+            Console.WriteLine("\nfollowing is test for inventory");
             var source = new Inventory()
             {
                 ItemToQuantity =
                     new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 } }
             };
+            string inventoryFile = null;
 
-            // TODO: move this into a inventory with a serialize and deserialize function.
-            string inventoryFile = "inventory.xml";
-            using (var writer = XmlWriter.Create(inventoryFile))
-                (new XmlSerializer(typeof(Inventory))).Serialize(writer, source);
+            inventoryFile = inventory.WriteInventory(source);
+            inventory.LoadInventory(inventoryFile);
 
-            using (var reader = new StreamReader(inventoryFile))
+
+            // test for find
+            Console.WriteLine("\nfollowing is test for find: ");
+            Item itemFinded = new Item();
+            itemFinded = itemsData.FindItem("Potion");
+
+            //test for unlock level
+            Console.WriteLine("\nfollowing is test for unlock level: ");
+            int level = 5;
+            List<Item> itemDataFinded = itemsData.UnlockedItemsAtLevel(level);
+
+            foreach (Item items in itemDataFinded)
             {
-                var serializer = new XmlSerializer(typeof(Inventory));
-                try
-                {
-                    Inventory inventory = serializer.Deserialize(reader) as Inventory;
-                    if (inventory != null)
-                    {
-                        foreach (var item in inventory.ItemToQuantity)
-                        {
-                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
-                        }
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Cannot load {0} due to the following {1}", 
-                        inventoryFile, ex.Message);
-                }
-
+                Console.WriteLine("item: {0}", items.Name);
             }
 
 

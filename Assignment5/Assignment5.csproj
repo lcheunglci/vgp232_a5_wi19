@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Inventory.cs" />
+    <Compile Include="Data\ItemReader.cs" />
     <Compile Include="Data\ItemsData.cs" />
     <Compile Include="Data\Item.cs" />
     <Compile Include="Data\Pokedex.cs" />
@@ -58,6 +59,7 @@
   <ItemGroup>
     <Content Include="itemData.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="pokemon151.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

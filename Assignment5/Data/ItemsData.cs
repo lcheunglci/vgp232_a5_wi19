@@ -7,9 +7,11 @@ using System.Xml.Serialization;
 
 namespace Assignment5.Data
 {
+    [XmlRoot("ItemsData")]
     public class ItemsData
     {
-        [XmlArray]
+        [XmlArray("Items")]
+        [XmlArrayItem("Item")]
         public List<Item> Items { get; set; }
 
         /// <summary>
@@ -27,8 +29,22 @@ namespace Assignment5.Data
         /// <returns>List of items that meet the requirement</returns>
         public List<Item> UnlockedItemsAtLevel(int level)
         {
-            // TODO: implement function to get all items and add unit to confirm it works.
-            throw new NotImplementedException();
+            // implement function to get all items and add unit to confirm it works
+            List<Item> listFinded = new List<Item>();
+            foreach (Item item in Items)
+            {
+                if (item.UnlockRequirement == level)
+                {
+                    listFinded.Add(item);
+                }
+            }
+
+            if (listFinded.Count == 0)
+            {
+                throw new Exception(string.Format(" item did not finded"));
+            }
+
+            return listFinded;
         }
 
         /// <summary>
@@ -38,8 +54,24 @@ namespace Assignment5.Data
         /// <returns>The item with the name specified or null if not found</returns>
         public Item FindItem(string name)
         {
-            // TODO: implement function to find the item with the name specified.
-            throw new NotImplementedException();
+            // implement function to find the item with the name specified.
+            Item itemFinded = new Item();
+            foreach(Item item in Items)
+            {
+                if (item.Name == name)
+                {
+                    Console.WriteLine(name + " finded");
+                    itemFinded = item;
+                    continue;
+                }
+            }
+
+            if(itemFinded.Name ==null)
+            {
+                throw new Exception(string.Format(" item did not finded"));
+            }
+            
+            return itemFinded;
         }
     }
 }
