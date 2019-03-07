@@ -12,14 +12,15 @@ namespace Assignment5.Data
         public int UnlockRequirement { get; set; }
         public string Description { get; set; }
         public string Effect { get; set; }
+        public Item() { }
 
-        //public Item(string name, int unlockRequirement, string description, string effect)
-        //{
-        //    this.Name = name;
-        //    this.UnlockRequirement = unlockRequirement;
-        //    this.Description = description;
-        //    this.Effect = effect;
-        //}
+        public Item(string name, int unlockRequirement, string description, string effect)
+        {
+            this.Name = name;
+            this.UnlockRequirement = unlockRequirement;
+            this.Description = description;
+            this.Effect = effect;
+        }
 
     }
 

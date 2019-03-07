@@ -56,7 +56,7 @@ namespace Assignment5.Data
         {
             // implement function to find the item with the name specified.
             Item itemFinded = new Item();
-            foreach(Item item in Items)
+            foreach (Item item in Items)
             {
                 if (item.Name == name)
                 {
@@ -66,12 +66,28 @@ namespace Assignment5.Data
                 }
             }
 
-            if(itemFinded.Name ==null)
+            if (itemFinded.Name == null)
             {
                 throw new Exception(string.Format(" item did not finded"));
             }
-            
+
             return itemFinded;
         }
+
+        public bool EqualsCheck(List<Item> itemToCheck)
+        {
+            bool check = false;
+            EqualityComparer<Item> comparer = EqualityComparer<Item>.Default;
+            for (int i = 0; i < itemToCheck.Count; i++)
+            {
+                if (!comparer.Equals(itemToCheck[i], Items[i]))
+                    check = false;
+                else
+                    check = true;
+            }
+
+            return check;
+        }
+
     }
 }
