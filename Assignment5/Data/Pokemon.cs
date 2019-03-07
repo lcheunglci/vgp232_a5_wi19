@@ -16,5 +16,32 @@ namespace Assignment5.Data
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int MaxCP { get; set; }
+
+        public override bool Equals(object other )
+        {
+            if (other == null || GetType() != other.GetType())
+            {
+                return false;
+            }
+
+            Pokemon b = (Pokemon)other;
+            if (
+                (Index == b.Index) &&
+                (Name == b.Name) &&
+                (Type1 == b.Type1) &&
+                (Type2 == b.Type2) &&
+                (HP == b.HP) &&
+                (Attack == b.Attack) &&
+                (Defense == b.Defense) &&
+                (MaxCP == b.MaxCP)
+                )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -10,14 +10,16 @@ namespace Assignment5.Data
 {
     public class PokemonReader
     {
-        XmlSerializer serializer;
+        private XmlSerializer pokedexSerializer;
+        private XmlSerializer pokeBagSerializer;
 
         /// <summary>
         /// Construtor
         /// </summary>
         public PokemonReader()
         {
-            serializer = new XmlSerializer(typeof(Pokedex));
+            pokedexSerializer = new XmlSerializer(typeof(Pokedex));
+            pokeBagSerializer = new XmlSerializer(typeof(PokemonBag));
         }
 
         /// <summary>
@@ -25,8 +27,10 @@ namespace Assignment5.Data
         /// </summary>
         /// <param name="filepath">The location of the xml file</param>
         /// <returns>A list of Pokemons</returns>
-        public Pokedex Load(string filepath)
+        public Pokedex Load_Pokedex(string filepath)
         {
+            //TODO:: check if file end of .xml
+            if (!filepath.EndsWith(".xml")) { filepath = filepath + ".xml"; }
             if (!File.Exists(filepath))
             {
                 throw new Exception(string.Format("{0} does not exist", filepath));
@@ -37,16 +41,41 @@ namespace Assignment5.Data
             {
                 try
                 {
-                    dex = serializer.Deserialize(file) as Pokedex;
+                    dex = pokedexSerializer.Deserialize(file) as Pokedex;
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
                     throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",
-                        filepath, ex.Message));
+                        filepath, e.Message));
                 }
             }
 
             return dex;
+        }
+
+        public PokemonBag Load_PokemonBag(string filePath)
+        {
+            //TODO:: check if file end of .xml
+            if (!filePath.EndsWith(".xml")) { filePath = filePath + ".xml"; }
+            if (!File.Exists(filePath))
+            {
+                throw new Exception(string.Format("{0} does not exist", filePath));
+            }
+
+            PokemonBag pokeBag = null;
+            using (var file = new StreamReader(filePath))
+            {
+                try
+                {
+                    pokeBag = pokeBagSerializer.Deserialize(file) as PokemonBag;
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",filePath, e.Message));
+                }
+            }
+
+            return pokeBag;
         }
 
     }
