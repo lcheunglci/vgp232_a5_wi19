@@ -1,14 +1,9 @@
 ﻿using Assignment5.Data;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Assignment5
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -25,7 +20,20 @@ namespace Assignment5
 
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
+            Console.WriteLine("\nSaving more pokemons inside bag\n");
+            PokemonBag bag = new PokemonBag();
+            bag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
+            bag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
+            bag.Add(pokedex.GetPokemonByName("Charizard").Index);
+            bag.Add(pokedex.GetPokemonByName("Mew").Index);
+            bag.Add(pokedex.GetPokemonByName("Dragonite").Index);
 
+            const string filepath = "PokeBag.xml";
+            bag.Save(filepath);
+            PokemonBag loadResult = bag.Load(filepath);
+            Console.WriteLine("\nLoad all pokemons from bag..\n");
+            loadResult.Pokemons.ForEach(item => Console.WriteLine(item));
+            
             Console.ReadKey();
         }
     }
