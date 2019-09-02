@@ -1,6 +1,7 @@
 ﻿using Assignment5.Data;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace Assignment5.Tests
@@ -32,6 +33,17 @@ namespace Assignment5.Tests
             // index 6 is Charizard
             Pokemon pokemon = mPokedex.GetPokemonByIndex(6);
             Assert.IsTrue(pokemon.Name == "Charizard");
+        }
+
+        [Test]
+        public void PokeDex_Get_Type()
+        {
+            List<Pokemon> listPokemon = mPokedex.GetPokemonsOfType("Water");
+            foreach (var item in listPokemon)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Assert.IsTrue(listPokemon.Count == 32);
         }
 
         [Test]

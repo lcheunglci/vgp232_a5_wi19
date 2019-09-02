@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 
@@ -39,13 +38,8 @@ namespace Assignment5.Data
             return temp;
         }
 
-        List<Pokemon> GetPokemonsOfType(string type)
-        {
-            // Note to check both Type1 and Type2
-            throw new NotImplementedException();
-        }
+        public List<Pokemon> GetPokemonsOfType(string type) => Pokemons.FindAll(p => p.Type1 == type || p.Type2 == type);
 
-        
         public Pokemon GetHighestHPPokemon() => Pokemons.OrderByDescending(p => p.HP).First();
 
         public Pokemon GetHighestAttackPokemon() => Pokemons.OrderByDescending(p => p.Attack).First();
