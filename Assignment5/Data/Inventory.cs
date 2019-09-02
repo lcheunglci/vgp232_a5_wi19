@@ -40,7 +40,7 @@ namespace Assignment5.Data
         }
 
         public Inventory Deserialize(string FileName)
-        { 
+        {
             using (var reader = new StreamReader(inventoryFile))
             {
                 var serializer = new XmlSerializer(typeof(Inventory));
@@ -53,7 +53,7 @@ namespace Assignment5.Data
                         {
                             Console.WriteLine("Item: {0}, Quantity: {1}", item.Key, item.Value);
                         }
-                    
+
                     }
                     return inventory;
                 }
@@ -73,18 +73,23 @@ namespace Assignment5.Data
             Console.WriteLine("Name: {0} , Quantity: {1}", entry.Key, entry.Value);
         }
 
-        public void UnlockItems(int level, ItemsData itemsData)
+        public List<Entry> UnlockItems(int level, ItemsData itemsData)
         {
-            List<Entry> inventoryitems = itemsData.UnlockedEntries(level,itemsData);
-
+            List<Entry> inventoryitems = itemsData.UnlockedEntries(level, itemsData);
+            List<Entry> UnlockedItems = new List<Entry>();
             foreach (Entry entry in inventoryitems)
             {
                 foreach (Entry inventry in Items)
                 {
-                    if(inventry.Key.ToString() == entry.Key.ToString())
-                    Console.WriteLine("Name: {0}, Quantity: {1}", inventry.Key, inventry.Value);
+                    if (inventry.Key.ToString() == entry.Key.ToString())
+                    {
+                        Console.WriteLine("Name: {0}, Quantity: {1}", inventry.Key, inventry.Value);
+                        UnlockedItems.Add(new Entry(inventry.Key, inventry.Value));
+                    }
                 }
             }
+            return UnlockedItems;
         }
     }
 }
+
