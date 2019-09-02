@@ -21,19 +21,47 @@ namespace Assignment5
             PokemonReader reader = new PokemonReader();
             Pokedex pokedex = reader.Load("pokemon151.xml");
 
+            Console.WriteLine("Displaying List of Pokemon:");
             // List out all the pokemons loaded
             foreach (Pokemon pokemon in pokedex.Pokemons)
             {
                 Console.WriteLine(pokemon.Name);
             }
 
-            
+
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
 
+
+
             // TODO: Add item reader and print out all the items
 
-            // TODO: hook up item data to display with the inventory
+
+            ItemReader itemreader = new ItemReader();
+            ItemsData itemsdata = itemreader.Load("itemData.xml");
+
+            Console.WriteLine("\nDisplaying List of Items from file");
+
+            foreach (Item item in itemsdata.Items)
+            {
+                Console.WriteLine(item.Name);
+                Console.WriteLine(item.UnlockRequirement);
+                Console.WriteLine(item.Description);
+                if (item.Effect == string.Empty)
+                {
+                    Console.WriteLine("\n");
+                }
+                else
+                {
+                    Console.WriteLine(item.Effect);
+                    Console.WriteLine("\n");
+                }
+            }
+
+
+            // TODO: hook up item data to display with the inventory (Still unsure what this means)
+
+            string InventoryFile = "inventory.xml";
 
             var source = new Inventory()
             {
@@ -41,35 +69,10 @@ namespace Assignment5
                     new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 } }
             };
 
-            // TODO: move this into a inventory with a serialize and deserialize function.
-            string inventoryFile = "inventory.xml";
-            using (var writer = XmlWriter.Create(inventoryFile))
-                (new XmlSerializer(typeof(Inventory))).Serialize(writer, source);
+            source.Serialize(source);
+            source.Deserialize(InventoryFile);
 
-            using (var reader = new StreamReader(inventoryFile))
-            {
-                var serializer = new XmlSerializer(typeof(Inventory));
-                try
-                {
-                    Inventory inventory = serializer.Deserialize(reader) as Inventory;
-                    if (inventory != null)
-                    {
-                        foreach (var item in inventory.ItemToQuantity)
-                        {
-                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
-                        }
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Cannot load {0} due to the following {1}", 
-                        inventoryFile, ex.Message);
-                }
-
-            }
-
-
+      
             Console.ReadKey();
         }
     }
