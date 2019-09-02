@@ -23,7 +23,7 @@ namespace Assignment5.Data
         {
             Pokemon PokemonIndex = new Pokemon();
             int foundIndex = (Pokemons.FindIndex(o => o.Index == index));
-            if (foundIndex >= 1 )
+            if (foundIndex >= 0 )
             {
                 PokemonIndex = Pokemons[foundIndex];
             }
@@ -34,7 +34,7 @@ namespace Assignment5.Data
         {
             Pokemon PokemonName = new Pokemon();
             int foundIndex = Pokemons.FindIndex(o => o.Name == name);
-            if(foundIndex >= 1)
+            if(foundIndex >= 0)
             {
                 PokemonName = Pokemons[foundIndex];
             }

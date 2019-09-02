@@ -76,7 +76,7 @@ namespace Assignment5.Data
             {
                 try
                 {
-                    pokemonBag = dexserializer.Deserialize(file) as PokemonBag;
+                    pokemonBag = bagserializer.Deserialize(file) as PokemonBag;
                 }
                 catch (Exception ex)
                 {

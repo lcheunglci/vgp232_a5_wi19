@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 
-//Testing Merge and Pull request Hi Cyro Macacao
 namespace Assignment5
 {
 
@@ -28,11 +27,8 @@ namespace Assignment5
             {
                 Console.WriteLine(pokemon.Name);
             }
-
-
-            // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
-            // and save it out and load it back and list it out.
-            Console.WriteLine("Saving various Pokemon in a bag");
+  
+            Console.WriteLine("\nSaving various Pokemon in a bag...");
             PokemonBag pokemonBag = new PokemonBag();
             pokemonBag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
             pokemonBag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
@@ -42,12 +38,19 @@ namespace Assignment5
 
             string filename = "PokemonBag.xml";
             pokemonBag.Save(filename);
-            //PokemonBag loadedbag = pokemonBag.Load(filename);
 
-            //foreach (int pokemon in loadedbag.Pokemons)
-            //{
-            //    Console.WriteLine(pokemon.ToString());
-            //}
+            Console.WriteLine("Displaying Loaded Pokemon from bag: ");
+            PokemonBag loadedbag = pokemonBag.Load(filename);        
+            foreach (int pokeindex in loadedbag.Pokemons)
+            {
+                foreach(Pokemon pokemon in pokedex.Pokemons)
+                {
+                    if(pokemon.Index == pokeindex)
+                    {
+                        pokemon.Print();
+                    }
+                }
+            }
 
 
             ItemReader itemReader = new ItemReader();
@@ -71,9 +74,7 @@ namespace Assignment5
 
             string itemname = "Super Potion";
             Console.WriteLine("Searching for item {0}", itemname);
-            itemsDatafile.FindItem(itemname).Print();
-
-            // TODO: hook up item data to display with the inventory (Still unsure what this means)
+            itemsDatafile.FindItem(itemname).Print();           
 
             string InventoryFile = "inventory.xml";
 
