@@ -19,5 +19,7 @@ namespace Assignment5.Data
         {
             Pokemons = new List<int>();
         }
+
+       
     }
 }
