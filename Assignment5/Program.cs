@@ -1,18 +1,8 @@
 ﻿using Assignment5.Data;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Serialization;
-
 namespace Assignment5
 {
-
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -27,32 +17,7 @@ namespace Assignment5
             {
                 Console.WriteLine(pokemon.Name);
             }
-  
-            Console.WriteLine("\nSaving various Pokemon in a bag...");
-            PokemonBag pokemonBag = new PokemonBag();
-            pokemonBag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
-            pokemonBag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
-            pokemonBag.Add(pokedex.GetPokemonByName("Charizard").Index);
-            pokemonBag.Add(pokedex.GetPokemonByName("Mew").Index);
-            pokemonBag.Add(pokedex.GetPokemonByName("Dragonite").Index);
-
-            string filename = "PokemonBag.xml";
-            pokemonBag.Save(filename);
-
-            Console.WriteLine("Displaying Loaded Pokemon from bag: ");
-            PokemonBag loadedbag = pokemonBag.Load(filename);        
-            foreach (int pokeindex in loadedbag.Pokemons)
-            {
-                foreach(Pokemon pokemon in pokedex.Pokemons)
-                {
-                    if(pokemon.Index == pokeindex)
-                    {
-                        pokemon.Print();
-                    }
-                }
-            }
-
-
+          
             ItemReader itemReader = new ItemReader();
             ItemsData itemsDatafile = itemReader.Load("itemData.xml");
 
@@ -97,7 +62,22 @@ namespace Assignment5
             Console.WriteLine("\nDisplaying items in inventory whose Level Req < {0}", iLevelLock);
             source.UnlockItems(iLevelLock,itemsDatafile);
 
+            // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
+            // and save it out and load it back and list it out.
+            Console.WriteLine("\nSaving more pokemons inside bag\n");
+            PokemonBag bag = new PokemonBag();
+            bag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
+            bag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
+            bag.Add(pokedex.GetPokemonByName("Charizard").Index);
+            bag.Add(pokedex.GetPokemonByName("Mew").Index);
+            bag.Add(pokedex.GetPokemonByName("Dragonite").Index);
 
+            const string filepath = "PokeBag.xml";
+            bag.Save(filepath);
+            PokemonBag loadResult = bag.Load(filepath);
+            Console.WriteLine("\nLoad all pokemons from bag..\n");
+            loadResult.Pokemons.ForEach(item => Console.WriteLine(item));
+            
             Console.ReadKey();
         }
     }

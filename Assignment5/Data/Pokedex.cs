@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Assignment5.Data
@@ -19,58 +16,41 @@ namespace Assignment5.Data
             Pokemons = new List<Pokemon>();
         }
 
-       public Pokemon GetPokemonByIndex(int index)
+
+        public Pokemon GetPokemonByIndex(int index)
         {
-            Pokemon PokemonIndex = new Pokemon();
-            int foundIndex = (Pokemons.FindIndex(o => o.Index == index));
-            if (foundIndex >= 0 )
+            Pokemon temp = new Pokemon();
+            int idx = Pokemons.FindIndex(i => i.Index == index);
+            if (idx != -1)
             {
-                PokemonIndex = Pokemons[foundIndex];
+                temp = Pokemons[idx];
             }
-            return PokemonIndex;    
+            return temp;
+
         }
 
         public Pokemon GetPokemonByName(string name)
         {
-            Pokemon PokemonName = new Pokemon();
-            int foundIndex = Pokemons.FindIndex(o => o.Name == name);
-            if(foundIndex >= 0)
+
+            Pokemon temp = new Pokemon();
+            int index = Pokemons.FindIndex(i => i.Name == name);
+            if (index != -1)
             {
-                PokemonName = Pokemons[foundIndex];
+                temp = Pokemons[index];
             }
-            return PokemonName;
-            
-
+            return temp;
         }
 
-        public List<Pokemon> GetPokemonsOfType(string type)
-        {
-            // Note to check both Type1 and Type2
-            List<Pokemon> PokemonTypes;
-            PokemonTypes = Pokemons.FindAll(x => x.Type1 == type || x.Type2 == type);
+        public List<Pokemon> GetPokemonsOfType(string type) => Pokemons.FindAll(p => p.Type1 == type || p.Type2 == type);
 
-            return PokemonTypes;
-        }
+        public Pokemon GetHighestHPPokemon() => Pokemons.OrderByDescending(p => p.HP).First();
 
-        public Pokemon GetHighestHPPokemon()
-        {
-            return Pokemons.OrderByDescending(o => o.HP).First();
-        }
+        public Pokemon GetHighestAttackPokemon() => Pokemons.OrderByDescending(p => p.Attack).First();
 
-        public Pokemon GetHighestAttackPokemon()
-        {
-            return Pokemons.OrderByDescending(o => o.Attack).First();
-        }
+        public Pokemon GetHighestDefensePokemon() => Pokemons.OrderByDescending(p => p.Defense).First();
 
-        public Pokemon GetHighestDefensePokemon()
-        {
-            return Pokemons.OrderByDescending(o => o.Defense).First();
-        }
+        public Pokemon GetHighestMaxCPPokemon() => Pokemons.OrderByDescending(p => p.MaxCP).First();
 
-        public Pokemon GetHighestMaxCPPokemon()
-        {
-            return Pokemons.OrderByDescending(o => o.MaxCP).First();
-        }
 
     }
 }

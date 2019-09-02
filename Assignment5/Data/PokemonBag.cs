@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +14,6 @@ namespace Assignment5.Data
     [XmlRoot("PokemonBag")]
     public class PokemonBag
     {
-    
         [XmlArray("Pokemons")]
         [XmlArrayItem("Index")]
         public List<int> Pokemons { get; set; }
@@ -25,21 +23,10 @@ namespace Assignment5.Data
             Pokemons = new List<int>();
         }
 
-        public void Add(int pokemonindex)
-        {
-            Pokemons.Add(pokemonindex);
-        }
+        public void Add(int pokemonIndex) => Pokemons.Add(pokemonIndex);
 
-       public void Save(string filename)
-        {
-            PokemonReader pokemonReader = new PokemonReader();
-            pokemonReader.PokemonBagSave(filename, this);
-        }
+        public void Save(string filepath) => new PokemonReader().SavePokemonBag(filepath, this);
 
-        public PokemonBag Load(string filename)
-        {
-            PokemonReader pokemonReader = new PokemonReader();
-            return pokemonReader.LoadPokemonBag(filename);
-        }
+        public PokemonBag Load(string filepath) => new PokemonReader().LoadPokemonBag(filepath);
     }
 }

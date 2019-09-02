@@ -61,8 +61,10 @@
     <Compile Include="Data\PokemonReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+
     <Compile Include="UnitTests\InventoryUnitTests.cs" />
     <Compile Include="UnitTests\ItemUnitTests.cs" />
+
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -73,7 +75,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="pokemon151.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
