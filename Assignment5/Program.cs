@@ -58,6 +58,7 @@ namespace Assignment5
             foreach (Item item in itemsDatafile.Items)
             {
                 item.Print();
+      
             }
 
             int iLevelLock = 10;
@@ -76,14 +77,24 @@ namespace Assignment5
 
             string InventoryFile = "inventory.xml";
 
+            Console.WriteLine("-----Creating Inventory-----");
             var source = new Inventory()
             {
                 ItemToQuantity =
-                    new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 } }
+                    new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 },
+                                                      {"Premier ball", 20 }, {"Revive",3}, {"Great ball",8 },
+                                                     {"Hyper Potion", 2 } }
             };
 
             source.Serialize(source);
             source.Deserialize(InventoryFile);
+
+            string entry = "Poke ball";
+            Console.WriteLine("\nSearching for {0} in Inventory", entry);
+            source.FindItem("Poke ball");
+
+            Console.WriteLine("\nDisplaying items in inventory whose Level Req < {0}", iLevelLock);
+            source.UnlockItems(iLevelLock,itemsDatafile);
 
 
             Console.ReadKey();

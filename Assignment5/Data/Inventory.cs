@@ -51,7 +51,7 @@ namespace Assignment5.Data
                     {
                         foreach (var item in inventory.ItemToQuantity)
                         {
-                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
+                            Console.WriteLine("Item: {0}, Quantity: {1}", item.Key, item.Value);
                         }
                     
                     }
@@ -63,6 +63,27 @@ namespace Assignment5.Data
                         inventoryFile, ex.Message);
                 }
                 return null;
+            }
+        }
+
+        public void FindItem(string name)
+        {
+            ItemsData mItemsdata = new ItemsData();
+            Entry entry = mItemsdata.FindEntry(this.Items, name);
+            Console.WriteLine("Name: {0} , Quantity: {1}", entry.Key, entry.Value);
+        }
+
+        public void UnlockItems(int level, ItemsData itemsData)
+        {
+            List<Entry> inventoryitems = itemsData.UnlockedEntries(level,itemsData);
+
+            foreach (Entry entry in inventoryitems)
+            {
+                foreach (Entry inventry in Items)
+                {
+                    if(inventry.Key.ToString() == entry.Key.ToString())
+                    Console.WriteLine("Name: {0}, Quantity: {1}", inventry.Key, inventry.Value);
+                }
             }
         }
     }

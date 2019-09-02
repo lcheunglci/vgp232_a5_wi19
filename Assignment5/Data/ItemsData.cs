@@ -58,5 +58,24 @@ namespace Assignment5.Data
 
             return FoundItem;
         }
+
+        public Entry FindEntry(List<Entry> entries, string name)
+        {
+           return entries.Find(o => o.Key.ToString() == name);
+        }
+
+        public List<Entry> UnlockedEntries(int level, ItemsData itemsData)
+        {
+            List<Entry> inventoryitems = new List<Entry>();
+
+            for(int i = 0; i < itemsData.Items.Count(); ++i)
+            {
+                if(itemsData.Items[i].UnlockRequirement <= level)
+                {
+                    inventoryitems.Add(new Entry(itemsData.Items[i].Name, null));
+                }
+            }
+            return inventoryitems;
+        }
     }
 }
