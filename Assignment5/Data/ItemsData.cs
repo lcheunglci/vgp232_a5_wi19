@@ -30,7 +30,10 @@ namespace Assignment5.Data
         public List<Item> UnlockedItemsAtLevel(int level)
         {
             // TODO: implement function to get all items and add unit to confirm it works.
-            throw new NotImplementedException();
+            List<Item> UnlockedItems;
+            UnlockedItems = Items.FindAll(o => o.UnlockRequirement <= level);
+
+            return UnlockedItems;
         }
 
         /// <summary>
@@ -41,7 +44,19 @@ namespace Assignment5.Data
         public Item FindItem(string name)
         {
             // TODO: implement function to find the item with the name specified.
-            throw new NotImplementedException();
+            Item FoundItem = new Item();
+
+            int foundIndex = (Items.FindIndex(o => o.Name == name));
+            if(foundIndex >= 1)
+            {
+                FoundItem = Items[foundIndex];
+            }
+            else 
+            {
+                FoundItem.Name = "Item Not found";
+            }
+
+            return FoundItem;
         }
     }
 }

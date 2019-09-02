@@ -32,9 +32,6 @@ namespace Assignment5.Data
             Items = new List<Entry>();
         }
 
-        //// TODO: move this into a inventory with a serialize and deserialize function.
-        //string inventoryFile = "inventory.xml";
-
         public void Serialize(Inventory newItem)
         {
             inventoryFile = "inventory.xml";
@@ -42,7 +39,7 @@ namespace Assignment5.Data
                 (new XmlSerializer(typeof(Inventory))).Serialize(writer, newItem);
         }
 
-        public void Deserialize(string FileName)
+        public Inventory Deserialize(string FileName)
         { 
             using (var reader = new StreamReader(inventoryFile))
             {
@@ -56,14 +53,16 @@ namespace Assignment5.Data
                         {
                             Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
                         }
+                    
                     }
+                    return inventory;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine("Cannot load {0} due to the following {1}",
                         inventoryFile, ex.Message);
                 }
-
+                return null;
             }
         }
     }

@@ -12,6 +12,7 @@ using System.Xml.Serialization;
 //Testing Merge and Pull request Hi Cyro Macacao
 namespace Assignment5
 {
+
     class Program
     {
         static void Main(string[] args)
@@ -31,33 +32,45 @@ namespace Assignment5
 
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
+            Console.WriteLine("Saving various Pokemon in a bag");
+            PokemonBag pokemonBag = new PokemonBag();
+            pokemonBag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
+            pokemonBag.Add(pokedex.GetPokemonByName("Bulbasaur").Index);
+            pokemonBag.Add(pokedex.GetPokemonByName("Charizard").Index);
+            pokemonBag.Add(pokedex.GetPokemonByName("Mew").Index);
+            pokemonBag.Add(pokedex.GetPokemonByName("Dragonite").Index);
+
+            string filename = "PokemonBag.xml";
+            pokemonBag.Save(filename);
+            //PokemonBag loadedbag = pokemonBag.Load(filename);
+
+            //foreach (int pokemon in loadedbag.Pokemons)
+            //{
+            //    Console.WriteLine(pokemon.ToString());
+            //}
 
 
-
-            // TODO: Add item reader and print out all the items
-
-
-            ItemReader itemreader = new ItemReader();
-            ItemsData itemsdata = itemreader.Load("itemData.xml");
+            ItemReader itemReader = new ItemReader();
+            ItemsData itemsDatafile = itemReader.Load("itemData.xml");
 
             Console.WriteLine("\nDisplaying List of Items from file");
 
-            foreach (Item item in itemsdata.Items)
+            foreach (Item item in itemsDatafile.Items)
             {
-                Console.WriteLine(item.Name);
-                Console.WriteLine(item.UnlockRequirement);
-                Console.WriteLine(item.Description);
-                if (item.Effect == string.Empty)
-                {
-                    Console.WriteLine("\n");
-                }
-                else
-                {
-                    Console.WriteLine(item.Effect);
-                    Console.WriteLine("\n");
-                }
+                item.Print();
             }
 
+            int iLevelLock = 10;
+            Console.WriteLine("Displaying items unlocked at level {0}", iLevelLock);
+            List<Item> UnlockedItems = itemsDatafile.UnlockedItemsAtLevel(iLevelLock);
+            foreach (Item item in UnlockedItems)
+            {
+                item.Print();
+            }
+
+            string itemname = "Super Potion";
+            Console.WriteLine("Searching for item {0}", itemname);
+            itemsDatafile.FindItem(itemname).Print();
 
             // TODO: hook up item data to display with the inventory (Still unsure what this means)
 
@@ -72,8 +85,9 @@ namespace Assignment5
             source.Serialize(source);
             source.Deserialize(InventoryFile);
 
-      
+
             Console.ReadKey();
         }
     }
+
 }

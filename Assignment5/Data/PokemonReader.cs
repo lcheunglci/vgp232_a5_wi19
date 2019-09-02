@@ -10,15 +10,18 @@ namespace Assignment5.Data
 {
     public class PokemonReader
     {
-        XmlSerializer serializer;
+        XmlSerializer dexserializer;
+        XmlSerializer bagserializer; 
 
         /// <summary>
         /// Construtor
         /// </summary>
         public PokemonReader()
         {
-            serializer = new XmlSerializer(typeof(Pokedex));
+            dexserializer = new XmlSerializer(typeof(Pokedex));
+            bagserializer = new XmlSerializer(typeof(PokemonBag));
         }
+
 
         /// <summary>
         /// Load a xml file that contains Pokemon Data to be deserialized into a list of Pokemons
@@ -37,7 +40,7 @@ namespace Assignment5.Data
             {
                 try
                 {
-                    dex = serializer.Deserialize(file) as Pokedex;
+                    dex = dexserializer.Deserialize(file) as Pokedex;
                 }
                 catch (Exception ex)
                 {
@@ -47,6 +50,42 @@ namespace Assignment5.Data
             }
 
             return dex;
+        }
+
+
+        public void PokemonBagSave(string filename, PokemonBag pokemonlist)
+        {
+            FileStream fs;
+
+            using (fs = new FileStream(filename, FileMode.Create))
+            {
+                bagserializer = new XmlSerializer(typeof(PokemonBag));
+                bagserializer.Serialize(fs, pokemonlist);
+            }
+        }
+
+        public PokemonBag LoadPokemonBag(string filename)
+        {
+            if (!File.Exists(filename))
+            {
+                throw new Exception(string.Format("{0} does not exist", filename));
+            }
+
+            PokemonBag pokemonBag = null;
+            using (var file = new StreamReader(filename))
+            {
+                try
+                {
+                    pokemonBag = dexserializer.Deserialize(file) as PokemonBag;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",
+                        filename, ex.Message));
+                }
+            }
+
+            return pokemonBag;
         }
 
     }
