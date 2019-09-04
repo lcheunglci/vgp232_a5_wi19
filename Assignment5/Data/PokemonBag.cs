@@ -13,11 +13,11 @@ namespace Assignment5.Data
     public class PokemonBag
     {
         [XmlArray]
-        public List<int> Pokemons { get; set; }
+        public List<Pokemon> Pokemons { get; set; }
 
         public PokemonBag()
         {
-            Pokemons = new List<int>();
+            Pokemons = new List<Pokemon>();
         }
     }
 }

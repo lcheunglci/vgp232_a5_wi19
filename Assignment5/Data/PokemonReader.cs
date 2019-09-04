@@ -27,27 +27,47 @@ namespace Assignment5.Data
         /// <returns>A list of Pokemons</returns>
         public Pokedex Load(string filepath)
         {
-            if (!File.Exists(filepath))
+            Pokedex pokeDex = new Pokedex();
+            try
             {
-                throw new Exception(string.Format("{0} does not exist", filepath));
+                using (FileStream fs = new FileStream(filepath, FileMode.Open))
+                {
+                    try
+                    {
+                        pokeDex = serializer.Deserialize(fs) as Pokedex;
+                        foreach (var pokemon in pokeDex.Pokemons)
+                        {
+                            pokeDex.Pokemons.Add(pokemon);
+                        }
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine(err.Message);
+                    }
+                }
             }
-
-            Pokedex dex = null;
-            using (var file = new StreamReader(filepath))
+            catch (FileNotFoundException err)
             {
-                try
-                {
-                    dex = serializer.Deserialize(file) as Pokedex;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",
-                        filepath, ex.Message));
-                }
+                Console.WriteLine(err.Message);
             }
-
-            return dex;
+            return pokeDex;
         }
 
+        public void Save(string fileName, Pokedex pokedex)
+        {
+            string outputFile = fileName + ".xml";
+            FileStream fs;
+            if (File.Exists(fileName))
+            {
+                fs = File.Open(outputFile, FileMode.Append);
+            }
+            else
+            {
+                fs = File.Open(outputFile, FileMode.Create);
+            }
+            XmlSerializer serializer = new XmlSerializer(typeof(Pokedex));
+            serializer.Serialize(fs, pokedex);
+            fs.Close();
+        }
     }
 }
