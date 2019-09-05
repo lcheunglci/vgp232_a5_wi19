@@ -44,7 +44,7 @@ namespace Assignment5
             using (var writer = XmlWriter.Create(inventoryFile))
                 (new XmlSerializer(typeof(Inventory))).Serialize(writer, source);
 
-            using (var reader = new StreamReader(inventoryFile))
+            using (StreamReader reader = new StreamReader(inventoryFile))
             {
                 var serializer = new XmlSerializer(typeof(Inventory));
                 try
