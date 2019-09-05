@@ -42,14 +42,18 @@ namespace Assignment5.Data
             return;
         }
 
-        public void Deserialize(string filePath)
+        public Inventory Deserialize(string filePath)
         {
+            if (!File.Exists(filePath))
+                throw new Exception(string.Format("{0} does not exist", filePath));
+
+            Inventory inventory = null;
             using (var reader = new StreamReader(filePath))
             {
                 var serializer = new XmlSerializer(typeof(Inventory));
                 try
                 {
-                    Inventory inventory = serializer.Deserialize(reader) as Inventory;
+                    inventory = serializer.Deserialize(reader) as Inventory;
                     if (inventory != null)
                     {
                         foreach (var item in inventory.ItemToQuantity)
@@ -66,7 +70,7 @@ namespace Assignment5.Data
                         filePath, ex.Message);
                 }
             }
-            return;
+            return inventory;
         }
 
         public void PrintItems()

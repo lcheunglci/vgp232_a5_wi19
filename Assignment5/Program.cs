@@ -39,9 +39,10 @@ namespace Assignment5
                     new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 } }
             };
             source.Serialize("itemData.xml");
-            //source.Deserialize("itemData.xml");
+            source.Deserialize("itemData.xml");
             source.PrintItems();
 
+            source.Serialize("itemData.xml");
 
             Console.ReadKey();
         }
