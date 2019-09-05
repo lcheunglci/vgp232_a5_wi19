@@ -7,9 +7,11 @@ using System.Xml.Serialization;
 
 namespace Assignment5.Data
 {
+    [XmlRoot("ItemsData")]
     public class ItemsData
     {
-        [XmlArray]
+        [XmlArray("Items")]
+        [XmlArrayItem("Item")]
         public List<Item> Items { get; set; }
 
         /// <summary>
@@ -27,8 +29,15 @@ namespace Assignment5.Data
         /// <returns>List of items that meet the requirement</returns>
         public List<Item> UnlockedItemsAtLevel(int level)
         {
-            // TODO: implement function to get all items and add unit to confirm it works.
-            throw new NotImplementedException();
+            List<Item> temp = new List<Item>();
+            for (int i = 0; i < Items.Count; i++)
+            {
+                if (Items[i].UnlockRequirement <= level)
+                {
+                    temp.Add(Items[i]);
+                }
+            }
+            return temp;
         }
 
         /// <summary>
@@ -38,8 +47,15 @@ namespace Assignment5.Data
         /// <returns>The item with the name specified or null if not found</returns>
         public Item FindItem(string name)
         {
-            // TODO: implement function to find the item with the name specified.
-            throw new NotImplementedException();
+            Item itemFound = new Item();
+            foreach (Item item in Items)
+            {
+                if (item.Name == name)
+                {
+                    itemFound = item;
+                }
+            }
+            return itemFound;
         }
     }
 }

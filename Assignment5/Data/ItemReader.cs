@@ -3,48 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 using System.Xml.Serialization;
-using System.Xml;
+using System.IO;
 
 namespace Assignment5.Data
 {
-    /// <summary>
-    /// Contains all the pokemons caught based listing them with their index
-    /// </summary>
-    public class PokemonBag
+    class ItemReader
     {
-        [XmlArray]
-        public List<int> Pokemons { get; set; }
         XmlSerializer serializer;
 
-        public PokemonBag()
+        public ItemReader()
         {
-            Pokemons = new List<int>();
-            serializer = new XmlSerializer(typeof(List<int>));
+            serializer = new XmlSerializer(typeof(ItemsData));
         }
 
-        public void SaveBag(string filename)
-        {
-            using (TextWriter tw = new StreamWriter(filename))
-            {
-                serializer.Serialize(tw, Pokemons);
-            }
-        }
-
-        public PokemonBag LoadBag(string filepath)
+        public ItemsData Load(string filepath)
         {
             if (!File.Exists(filepath))
             {
                 throw new Exception(string.Format("{0} does not exist", filepath));
             }
 
-            PokemonBag bag = new PokemonBag();
+            ItemsData items = null;
             using (var file = new StreamReader(filepath))
             {
                 try
                 {
-                    bag.Pokemons = serializer.Deserialize(file) as List<int>;
+                    items = serializer.Deserialize(file) as ItemsData;
                 }
                 catch (Exception ex)
                 {
@@ -53,7 +38,7 @@ namespace Assignment5.Data
                 }
             }
 
-            return bag;
+            return items;
         }
     }
 }

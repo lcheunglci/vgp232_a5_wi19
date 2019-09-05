@@ -19,40 +19,71 @@ namespace Assignment5.Data
             Pokemons = new List<Pokemon>();
         }
 
-        Pokemon GetPokemonByIndex(int index)
+        public Pokemon GetPokemonByIndex(int index)
         {
-            throw new NotImplementedException();
+            Pokemon poke = new Pokemon();
+            for (int i = 0; i < Pokemons.Count; i++)
+            {
+                if (Pokemons[i].Index == index)
+                {
+                    poke = Pokemons[i];
+                }
+            }
+            return poke;
         }
 
-        Pokemon GetPokemonByName(string name)
+        public Pokemon GetPokemonByName(string name)
         {
-            throw new NotImplementedException();
+            Pokemon poke = new Pokemon();
+            foreach (Pokemon pokemon in Pokemons)
+            {
+                if (pokemon.Name == name)
+                {
+                    poke = pokemon;
+                }
+            }
+            return poke; ;
         }
 
-        List<Pokemon> GetPokemonsOfType(string type)
+        public List<Pokemon> GetPokemonsOfType(string type)
         {
-            // Note to check both Type1 and Type2
-            throw new NotImplementedException();
+            List<Pokemon> poke = new List<Pokemon>();
+            foreach (Pokemon pokemon in Pokemons)
+            {
+                if (pokemon.Type1 == type || pokemon.Type2 == type)
+                {
+                    poke.Add(pokemon);
+                }
+            }
+            return poke;
         }
 
-        Pokemon GetHighestHPPokemon()
+        public Pokemon GetHighestHPPokemon()
         {
-            throw new NotImplementedException();
+            List<Pokemon> temp = Pokemons;
+            temp.Sort(Pokemon.CompareByPokemonHP);
+            return temp[0];
         }
 
-        Pokemon GetHighestAttackPokemon()
+        public Pokemon GetHighestAttackPokemon()
         {
-            throw new NotImplementedException();
+            List<Pokemon> temp = Pokemons;
+            temp.Sort(Pokemon.CompareByPokemonAttack);
+            return temp[0];
         }
 
-        Pokemon GetHighestDefensePokemon()
+        public Pokemon GetHighestDefensePokemon()
         {
-            throw new NotImplementedException();
+            List<Pokemon> temp = Pokemons;
+            temp.Sort(Pokemon.CompareByPokemonDefense);
+            return temp[0];
         }
 
-        Pokemon GetHighestMaxCPPokemon()
+        public Pokemon GetHighestMaxCPPokemon()
         {
-            throw new NotImplementedException();
+            List<Pokemon> temp = Pokemons;
+            temp.Sort(Pokemon.CompareByPokemonMaxCP);
+            return temp[0];
         }
 
     }
