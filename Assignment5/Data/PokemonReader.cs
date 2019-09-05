@@ -27,30 +27,25 @@ namespace Assignment5.Data
         /// <returns>A list of Pokemons</returns>
         public Pokedex Load(string filepath)
         {
-            Pokedex pokeDex = new Pokedex();
-            try
+            if (!File.Exists(filepath))
             {
-                using (FileStream fs = new FileStream(filepath, FileMode.Open))
+                throw new Exception(string.Format("{0} does not exist", filepath));
+            }
+
+            Pokedex dex = null;
+            using (var file = new StreamReader(filepath))
+            {
+                try
                 {
-                    try
-                    {
-                        pokeDex = serializer.Deserialize(fs) as Pokedex;
-                        foreach (var pokemon in pokeDex.Pokemons)
-                        {
-                            pokeDex.Pokemons.Add(pokemon);
-                        }
-                    }
-                    catch (Exception err)
-                    {
-                        Console.WriteLine(err.Message);
-                    }
+                    dex = serializer.Deserialize(file) as Pokedex;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}", filepath, ex.Message));
                 }
             }
-            catch (FileNotFoundException err)
-            {
-                Console.WriteLine(err.Message);
-            }
-            return pokeDex;
+
+            return dex;
         }
 
         public void Save(string fileName, Pokedex pokedex)
