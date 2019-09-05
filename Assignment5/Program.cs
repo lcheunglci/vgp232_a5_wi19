@@ -30,7 +30,13 @@ namespace Assignment5
             // and save it out and load it back and list it out.
 
             // TODO: Add item reader and print out all the items
+            ItemReader itemReader = new ItemReader();
+            ItemsData itemsData = itemReader.Load("itemData.xml");
 
+            foreach (var item in itemsData.Items)
+            {
+                Console.WriteLine(item.Name);
+            }
 
             // TODO: hook up item data to display with the inventory
 
@@ -42,32 +48,8 @@ namespace Assignment5
 
             // TODO: move this into a inventory with a serialize and deserialize function.
             string inventoryFile = "inventory.xml";
-            using (var writer = XmlWriter.Create(inventoryFile))
-                (new XmlSerializer(typeof(Inventory))).Serialize(writer, source);
-
-            using (StreamReader reader = new StreamReader(inventoryFile))
-            {
-                var serializer = new XmlSerializer(typeof(Inventory));
-                try
-                {
-                    Inventory inventory = serializer.Deserialize(reader) as Inventory;
-                    if (inventory != null)
-                    {
-                        foreach (var item in inventory.ItemToQuantity)
-                        {
-                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
-                        }
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Cannot load {0} due to the following {1}", 
-                        inventoryFile, ex.Message);
-                }
-
-            }
-
+            source.Load(inventoryFile,itemsData);
+            source.Save("invent.xml");
 
             Console.ReadKey();
         }
