@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.Xml;
 using System.IO;
+
 namespace Assignment5.Data
 {
     public class Inventory
@@ -30,7 +31,7 @@ namespace Assignment5.Data
             Items = new List<Entry>();
         }
 
-        public void Serialize(string filePath)
+        public void Serialize(string filePath) // Functionally the save function of Inventory
         {
             //string inventoryFile = "inventory.xml";
             if(!File.Exists(filePath))
@@ -42,7 +43,8 @@ namespace Assignment5.Data
             return;
         }
 
-        public Inventory Deserialize(string filePath)
+        
+        public Inventory Deserialize(string filePath) // Functionally the load function of Inventory
         {
             if (!File.Exists(filePath))
                 throw new Exception(string.Format("{0} does not exist", filePath));
@@ -85,6 +87,19 @@ namespace Assignment5.Data
             else
             {
                 Console.WriteLine("No Items in bag");
+            }
+        }
+
+        
+        public void DisplayItem(Item input) // Displays item details through ItemData.cs
+        {
+            foreach(var item in Items)
+            {
+                if(item.Key == input)
+                {
+                    // TODO make the itemData display through this?
+                    return;
+                }
             }
         }
     }

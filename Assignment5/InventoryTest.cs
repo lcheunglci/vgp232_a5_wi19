@@ -30,18 +30,26 @@ namespace Assignment5
             myDirPath = Path.GetDirectoryName(myDirPath);
         }
 
-        [TestCase("")]
-        public void SaveItemBagFile(string name)
+        [TestCase("Potion")]
+        public void SaveItemBagFile(string name, int value)
         {
+            ItemReader reader = new ItemReader();
+            ItemsData itemsData = reader.Load(myTestInputPath);
             Inventory inventory = new Inventory();
-            ItemsData itemsData = inventory.Serialize(myTestInputPath);
-
+            inventory.Deserialize(myTestInputPath);
+            inventory.Serialize(myTestOutputPath);
+            Assert.IsTrue(File.Exists(myTestOutputPath));
         }
 
         [Test]
-        public void LoagItemBagFile()
+        public void LoadItemBagFile()
         {
+            ItemReader reader = new ItemReader();
+            ItemsData itemsData = reader.Load(myTestInputPath);
             Inventory inventory = new Inventory();
+            //TODO Possibly have an add items function to inventory
+            inventory.Serialize(myTestOutputPath);
+            inventory.Deserialize(myTestOutputPath);
 
         }
     }
