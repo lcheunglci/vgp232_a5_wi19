@@ -28,5 +28,36 @@ namespace Assignment5.Data
         {
             Items = new List<Entry>();
         }
+
+        public void serialize()
+        {
+            // TODO: move this into a inventory with a serialize and deserialize function.
+            string inventoryFile = "inventory.xml";
+            using (var writer = XmlWriter.Create(inventoryFile))
+                (new XmlSerializer(typeof(Inventory))).Serialize(writer, Items);
+
+            using (var reader = new StreamReader(inventoryFile))
+            {
+                var serializer = new XmlSerializer(typeof(Inventory));
+                try
+                {
+                    Inventory inventory = serializer.Deserialize(reader) as Inventory;
+                    if (inventory != null)
+                    {
+                        foreach (var item in inventory.ItemToQuantity)
+                        {
+                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
+                        }
+                    }
+                }
+
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Cannot load {0} due to the following {1}",
+                        inventoryFile, ex.Message);
+                }
+
+            }
+        }
     }
 }
