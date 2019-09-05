@@ -7,9 +7,11 @@ using System.Xml.Serialization;
 
 namespace Assignment5.Data
 {
+
     public class ItemsData
     {
-        [XmlArray]
+        [XmlArray("Items")]
+        [XmlArrayItem("Item")]
         public List<Item> Items { get; set; }
 
         /// <summary>
@@ -30,7 +32,7 @@ namespace Assignment5.Data
             List<Item> items = new List<Item>();
             foreach (var item in Items)
             {
-                if (item.Equals(level))  
+                if (item.UnlockRequirement <= level) 
                 {
                     items.Add(item);
                 }
