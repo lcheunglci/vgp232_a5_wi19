@@ -38,8 +38,9 @@ namespace Assignment5
                 ItemToQuantity =
                     new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 } }
             };
-
-
+            source.Serialize("itemData.xml");
+            //source.Deserialize("itemData.xml");
+            source.PrintItems();
 
 
             Console.ReadKey();
