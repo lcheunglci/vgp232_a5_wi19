@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-
+using System.Xml;
+using System.IO;
 namespace Assignment5.Data
 {
     public class Inventory
@@ -29,14 +30,21 @@ namespace Assignment5.Data
             Items = new List<Entry>();
         }
 
-        public void serialize()
+        public void Serialize(string filePath)
         {
-            // TODO: move this into a inventory with a serialize and deserialize function.
-            string inventoryFile = "inventory.xml";
-            using (var writer = XmlWriter.Create(inventoryFile))
-                (new XmlSerializer(typeof(Inventory))).Serialize(writer, Items);
+            //string inventoryFile = "inventory.xml";
+            if(!File.Exists(filePath))
+            {
+                throw new Exception(string.Format("{0} does not exist", filePath));                
+            }
+            using (var writer = XmlWriter.Create(filePath))
+                (new XmlSerializer(typeof(Inventory))).Serialize(writer, this);
+            return;
+        }
 
-            using (var reader = new StreamReader(inventoryFile))
+        public void Deserialize(string filePath)
+        {
+            using (var reader = new StreamReader(filePath))
             {
                 var serializer = new XmlSerializer(typeof(Inventory));
                 try
@@ -46,17 +54,33 @@ namespace Assignment5.Data
                     {
                         foreach (var item in inventory.ItemToQuantity)
                         {
-                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
+                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);                            
                         }
+                        Items = inventory.Items;
                     }
                 }
 
                 catch (Exception ex)
                 {
                     Console.WriteLine("Cannot load {0} due to the following {1}",
-                        inventoryFile, ex.Message);
+                        filePath, ex.Message);
                 }
+            }
+            return;
+        }
 
+        public void PrintItems()
+        {
+            if (Items.Any())
+            { 
+                foreach (var item in Items)
+                {
+                    Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
+                }
+            }
+            else
+            {
+                Console.WriteLine("No Items in bag");
             }
         }
     }
