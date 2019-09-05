@@ -27,9 +27,19 @@ namespace Assignment5.Data
         /// <returns>List of items that meet the requirement</returns>
         public List<Item> UnlockedItemsAtLevel(int level)
         {
+            List<Item> items = new List<Item>();
+            foreach (var item in Items)
+            {
+                if (item.Equals(level))  
+                {
+                    items.Add(item);
+                }
+            }
+            return items;
             // TODO: implement function to get all items and add unit to confirm it works.
             throw new NotImplementedException();
         }
+
 
         /// <summary>
         /// Gets the item with the matching name
@@ -38,8 +48,23 @@ namespace Assignment5.Data
         /// <returns>The item with the name specified or null if not found</returns>
         public Item FindItem(string name)
         {
+            if (Items.Count == 0) 
+            {
+                return null;
+            }
+            foreach (var item in Items)
+            {
+                if (item.Name == name) 
+                {
+
+                    return item;
+                }
+            }
+
+
             // TODO: implement function to find the item with the name specified.
             throw new NotImplementedException();
         }
+        
     }
 }
