@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assignment5.Data
+﻿namespace Assignment5.Data
 {
     public class Pokemon
     {
@@ -16,5 +10,23 @@ namespace Assignment5.Data
         public int Attack { get; set; }
         public int Defense { get; set; }
         public int MaxCP { get; set; }
+
+
+
+        public void Print()
+        {
+            Console.WriteLine("Index: {0}", Index);
+            Console.WriteLine("Name: {0}", Name);
+            Console.WriteLine("Type1: {0}", Type1);
+            Console.WriteLine("Type2: {0}", Type2);
+            Console.WriteLine("HP: {0}", HP);
+            Console.WriteLine("Attack: {0}", Attack);
+            Console.WriteLine("Defense: {0}", Defense);
+            Console.WriteLine("MaxCP: {0}", MaxCP);
+            Console.Write("\n");
+
+
+        }
     }
+
 }

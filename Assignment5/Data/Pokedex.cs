@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace Assignment5.Data
@@ -19,41 +16,41 @@ namespace Assignment5.Data
             Pokemons = new List<Pokemon>();
         }
 
-        Pokemon GetPokemonByIndex(int index)
+
+        public Pokemon GetPokemonByIndex(int index)
         {
-            throw new NotImplementedException();
+            Pokemon temp = new Pokemon();
+            int idx = Pokemons.FindIndex(i => i.Index == index);
+            if (idx != -1)
+            {
+                temp = Pokemons[idx];
+            }
+            return temp;
+
         }
 
-        Pokemon GetPokemonByName(string name)
+        public Pokemon GetPokemonByName(string name)
         {
-            throw new NotImplementedException();
+
+            Pokemon temp = new Pokemon();
+            int index = Pokemons.FindIndex(i => i.Name == name);
+            if (index != -1)
+            {
+                temp = Pokemons[index];
+            }
+            return temp;
         }
 
-        List<Pokemon> GetPokemonsOfType(string type)
-        {
-            // Note to check both Type1 and Type2
-            throw new NotImplementedException();
-        }
+        public List<Pokemon> GetPokemonsOfType(string type) => Pokemons.FindAll(p => p.Type1 == type || p.Type2 == type);
 
-        Pokemon GetHighestHPPokemon()
-        {
-            throw new NotImplementedException();
-        }
+        public Pokemon GetHighestHPPokemon() => Pokemons.OrderByDescending(p => p.HP).First();
 
-        Pokemon GetHighestAttackPokemon()
-        {
-            throw new NotImplementedException();
-        }
+        public Pokemon GetHighestAttackPokemon() => Pokemons.OrderByDescending(p => p.Attack).First();
 
-        Pokemon GetHighestDefensePokemon()
-        {
-            throw new NotImplementedException();
-        }
+        public Pokemon GetHighestDefensePokemon() => Pokemons.OrderByDescending(p => p.Defense).First();
 
-        Pokemon GetHighestMaxCPPokemon()
-        {
-            throw new NotImplementedException();
-        }
+        public Pokemon GetHighestMaxCPPokemon() => Pokemons.OrderByDescending(p => p.MaxCP).First();
+
 
     }
 }
