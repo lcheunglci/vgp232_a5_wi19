@@ -31,6 +31,7 @@ namespace Assignment5
 
             // TODO: Add item reader and print out all the items
 
+
             // TODO: hook up item data to display with the inventory
 
             var source = new Inventory()
