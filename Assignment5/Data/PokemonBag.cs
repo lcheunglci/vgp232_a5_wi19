@@ -10,6 +10,7 @@ namespace Assignment5.Data
     /// <summary>
     /// Contains all the pokemons caught based listing them with their index
     /// </summary>
+    [Serializable]
     public class PokemonBag
     {
         [XmlArray]
@@ -18,6 +19,26 @@ namespace Assignment5.Data
         public PokemonBag()
         {
             Pokemons = new List<int>();
+        }
+
+        public void AddPokemon(Pokemon pokemon)
+        {
+            if (pokemon==null)
+            {
+                return;
+            }
+            Pokemons.Add(pokemon.Index);
+        }
+
+        public void Save(string filepath)
+        {
+            PokemonReader reader = new PokemonReader();
+            reader.SavePokemonBag(this,filepath);
+        }
+        public PokemonBag Load(string filepath)
+        {
+            PokemonReader reader = new PokemonReader();
+            return reader.LoadPokemonBag(filepath);
         }
     }
 }

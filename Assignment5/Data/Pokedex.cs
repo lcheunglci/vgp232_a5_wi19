@@ -19,40 +19,116 @@ namespace Assignment5.Data
             Pokemons = new List<Pokemon>();
         }
 
-        Pokemon GetPokemonByIndex(int index)
+        public Pokemon GetPokemonByIndex(int index)
         {
-            throw new NotImplementedException();
+            foreach (var pokemon in Pokemons)
+            {
+                if (pokemon.Index == index)
+                {
+                    return pokemon;
+                }
+            }
+            return null;
+           //throw new NotImplementedException();
         }
 
-        Pokemon GetPokemonByName(string name)
+        public Pokemon GetPokemonByName(string name)
         {
-            throw new NotImplementedException();
+            foreach (var pokemon in Pokemons)
+            {
+                if (pokemon.Name.ToUpper() == name.ToUpper())
+                {
+                    return pokemon;
+                }
+            }
+            return null;
+            //throw new NotImplementedException();
         }
 
-        List<Pokemon> GetPokemonsOfType(string type)
+        public List<Pokemon> GetPokemonsOfType(string type)
         {
             // Note to check both Type1 and Type2
-            throw new NotImplementedException();
+            List <Pokemon> pokemonsType = new List <Pokemon>();
+            foreach (var pokemon in Pokemons)
+            {
+                if (pokemon.Type1 == type || pokemon.Type2 == type)
+                {
+                    pokemonsType.Add(pokemon);
+                }
+            }
+            return pokemonsType;
         }
 
-        Pokemon GetHighestHPPokemon()
+        public Pokemon GetHighestHPPokemon()
         {
-            throw new NotImplementedException();
+            if (Pokemons.Count ==0)
+            {
+                return null;
+            }
+            Pokemon highestHpPokemon = Pokemons[0];
+            foreach (var pokemon in Pokemons)
+            {
+                if (highestHpPokemon.HP < pokemon.HP)
+                {
+                    highestHpPokemon = pokemon;
+                }
+            }
+            return highestHpPokemon;
+            //throw new NotImplementedException();
         }
 
-        Pokemon GetHighestAttackPokemon()
+        public Pokemon GetHighestAttackPokemon()
         {
-            throw new NotImplementedException();
+            if (Pokemons.Count == 0)
+            {
+                return null;
+            }
+            Pokemon highestAttackPokemon = Pokemons[0];
+            foreach (var pokemon in Pokemons)
+            {
+                if (highestAttackPokemon.Attack < pokemon.Attack)
+                {
+                    highestAttackPokemon = pokemon;
+                }
+            }
+            return highestAttackPokemon;
+            //throw new NotImplementedException();
         }
 
-        Pokemon GetHighestDefensePokemon()
+        public Pokemon GetHighestDefensePokemon()
         {
-            throw new NotImplementedException();
+            if (Pokemons.Count == 0)
+            {
+                return null;
+            }
+            Pokemon highestDefensePokemon = Pokemons[0];
+            foreach (var pokemon in Pokemons)
+            {
+                if (highestDefensePokemon.Defense < pokemon.Defense)
+                {
+                    highestDefensePokemon = pokemon;
+                }
+            }
+            return highestDefensePokemon;
+            //throw new NotImplementedException();
         }
 
-        Pokemon GetHighestMaxCPPokemon()
+        public Pokemon GetHighestMaxCPPokemon()
         {
-            throw new NotImplementedException();
+            if (Pokemons.Count == 0)
+            {
+                return null;
+            }
+            Pokemon highestMaxCpPokemon = Pokemons[0];
+            foreach (var pokemon in Pokemons)
+            {
+                if (highestMaxCpPokemon.MaxCP < pokemon.MaxCP)
+                {
+                    highestMaxCpPokemon = pokemon;
+                }
+            }
+            return highestMaxCpPokemon;
+            //throw new NotImplementedException();
         }
 
     }

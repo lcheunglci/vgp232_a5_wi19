@@ -45,9 +45,39 @@ namespace Assignment5.Data
                         filepath, ex.Message));
                 }
             }
-
             return dex;
         }
 
+        public void SavePokemonBag(PokemonBag pokemonBag,string filepath)
+        {
+            XmlSerializer xmlserializer = new XmlSerializer(typeof(PokemonBag));
+            using (FileStream fs = new FileStream(filepath, FileMode.Create))
+            {
+                xmlserializer.Serialize(fs, pokemonBag);
+            }
+        }
+        public PokemonBag LoadPokemonBag(string filepath)
+        {
+            XmlSerializer xmlserializer = new XmlSerializer(typeof(PokemonBag));
+            if (!File.Exists(filepath))
+            {
+                throw new Exception(string.Format("{0} does not exist", filepath));
+            }
+
+            PokemonBag bag = null;
+            using (var file = new StreamReader(filepath))
+            {
+                try
+                {
+                    bag = xmlserializer.Deserialize(file) as PokemonBag;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",
+                        filepath, ex.Message));
+                }
+            }
+            return bag;
+        }
     }
 }
