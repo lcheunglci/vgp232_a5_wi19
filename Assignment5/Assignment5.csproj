@@ -50,10 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Inventory.cs" />
+    <Compile Include="Data\ItemReader.cs" />
+    <Compile Include="Data\ItemsData.cs" />
     <Compile Include="Data\Item.cs" />
     <Compile Include="Data\nUnit.cs" />
     <Compile Include="Data\Pokedex.cs" />
     <Compile Include="Data\Pokemon.cs" />
+    <Compile Include="Data\Entry.cs" />
     <Compile Include="Data\PokemonBag.cs" />
     <Compile Include="Data\PokemonReader.cs" />
     <Compile Include="Program.cs" />
@@ -64,8 +68,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="itemData.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="pokemon151.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
