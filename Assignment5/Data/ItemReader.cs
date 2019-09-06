@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using System.IO;
 
 namespace Assignment5.Data
 {
-    public class PokemonReader
+    class ItemReader
     {
         XmlSerializer serializer;
 
         /// <summary>
         /// Construtor
         /// </summary>
-        public PokemonReader()
+        public ItemReader()
         {
-            serializer = new XmlSerializer(typeof(Pokedex));
+            serializer = new XmlSerializer(typeof(Inventory));
         }
 
         /// <summary>
@@ -25,19 +25,19 @@ namespace Assignment5.Data
         /// </summary>
         /// <param name="filepath">The location of the xml file</param>
         /// <returns>A list of Pokemons</returns>
-        public Pokedex Load(string filepath)
+        public ItemsData Load(string filepath)
         {
             if (!File.Exists(filepath))
             {
                 throw new Exception(string.Format("{0} does not exist", filepath));
             }
 
-            Pokedex dex = null;
+            ItemsData itemsData = null;
             using (var file = new StreamReader(filepath))
             {
                 try
                 {
-                    dex = serializer.Deserialize(file) as Pokedex;
+                    itemsData = serializer.Deserialize(file) as ItemsData;
                 }
                 catch (Exception ex)
                 {
@@ -45,31 +45,31 @@ namespace Assignment5.Data
                         filepath, ex.Message));
                 }
             }
-            return dex;
+            return itemsData;
         }
 
-        public void SavePokemonBag(PokemonBag pokemonBag,string filepath)
+        public void SaveInventory(Inventory inventory, string filepath)
         {
-            XmlSerializer xmlserializer = new XmlSerializer(typeof(PokemonBag));
+            XmlSerializer xmlserializer = new XmlSerializer(typeof(Inventory));
             using (FileStream fs = new FileStream(filepath, FileMode.Create))
             {
-                xmlserializer.Serialize(fs, pokemonBag);
+                xmlserializer.Serialize(fs, inventory);
             }
         }
-        public PokemonBag LoadPokemonBag(string filepath)
+        public ItemsData LoadInventory(string filepath)
         {
-            XmlSerializer xmlserializer = new XmlSerializer(typeof(PokemonBag));
+            XmlSerializer xmlserializer = new XmlSerializer(typeof(Inventory));
             if (!File.Exists(filepath))
             {
                 throw new Exception(string.Format("{0} does not exist", filepath));
             }
 
-            PokemonBag bag = null;
+            ItemsData itemsData = null;
             using (var file = new StreamReader(filepath))
             {
                 try
                 {
-                    bag = xmlserializer.Deserialize(file) as PokemonBag;
+                    itemsData = xmlserializer.Deserialize(file) as ItemsData;
                 }
                 catch (Exception ex)
                 {
@@ -77,7 +77,7 @@ namespace Assignment5.Data
                         filepath, ex.Message));
                 }
             }
-            return bag;
+            return itemsData;
         }
     }
 }
