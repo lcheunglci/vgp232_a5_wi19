@@ -19,40 +19,98 @@ namespace Assignment5.Data
             Pokemons = new List<Pokemon>();
         }
 
-        Pokemon GetPokemonByIndex(int index)
+        public Pokemon GetPokemonByIndex(int index)
         {
-            throw new NotImplementedException();
+            Pokemon pok = new Pokemon();
+            foreach (var poke in Pokemons)
+            {
+                if(poke.Index == index)
+                {
+                    pok = poke;
+                }
+            }
+            return pok;
         }
 
-        Pokemon GetPokemonByName(string name)
+        public Pokemon GetPokemonByName(string name)
         {
-            throw new NotImplementedException();
+            foreach (Pokemon pok in Pokemons)
+            {
+                if(pok.Name == name)
+                {
+                    return pok;
+                }
+            }
+            return null;
         }
 
-        List<Pokemon> GetPokemonsOfType(string type)
+        public List<Pokemon> GetPokemonsOfType(string type)
         {
-            // Note to check both Type1 and Type2
-            throw new NotImplementedException();
+            List<Pokemon> poks = new List<Pokemon>();
+            foreach (var pok in Pokemons)
+            {
+                if(pok.Type1 == type || pok.Type2 == type)
+                {
+                    poks.Add(pok);
+                }
+            }
+            return poks;
         }
 
-        Pokemon GetHighestHPPokemon()
+        public Pokemon GetHighestHPPokemon()
         {
-            throw new NotImplementedException();
+            Pokemon pok = new Pokemon();
+            pok.HP = 0;
+            foreach (var poke in Pokemons)
+            {
+                if(poke.HP > pok.HP)
+                {
+                    pok = poke;
+                }
+            }
+            return pok;
         }
 
-        Pokemon GetHighestAttackPokemon()
+        public Pokemon GetHighestAttackPokemon()
         {
-            throw new NotImplementedException();
+            Pokemon pok = new Pokemon();
+            pok.Attack = 0;
+            foreach (var poke in Pokemons)
+            {
+                if (poke.Attack > pok.Attack)
+                {
+                    pok = poke;
+                }
+            }
+            return pok;
         }
 
-        Pokemon GetHighestDefensePokemon()
+        public Pokemon GetHighestDefensePokemon()
         {
-            throw new NotImplementedException();
+            Pokemon pok = new Pokemon();
+            pok.Defense = 0;
+            foreach (var poke in Pokemons)
+            {
+                if (poke.Defense > pok.Defense)
+                {
+                    pok = poke;
+                }
+            }
+            return pok;
         }
 
-        Pokemon GetHighestMaxCPPokemon()
+        public Pokemon GetHighestMaxCPPokemon()
         {
-            throw new NotImplementedException();
+            Pokemon pok = new Pokemon();
+            pok.MaxCP = 0;
+            foreach (var poke in Pokemons)
+            {
+                if (poke.MaxCP > pok.MaxCP)
+                {
+                    pok = poke;
+                }
+            }
+            return pok;
         }
 
     }

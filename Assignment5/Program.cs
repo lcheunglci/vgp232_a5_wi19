@@ -26,6 +26,7 @@ namespace Assignment5
                 Console.WriteLine(pokemon.Name);
             }
 
+
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
 
@@ -50,6 +51,27 @@ namespace Assignment5
             string inventoryFile = "inventory.xml";
             source.Load(inventoryFile,itemsData);
             source.Save("invent.xml");
+  
+  
+            Console.WriteLine("=========Bag=========");
+
+            PokemonBag pokebag = new PokemonBag();
+
+            pokebag.Pokemons.Add(pokedex.GetPokemonByName("Bulbasaur"));
+            pokebag.Pokemons.Add(pokedex.GetPokemonByName("Bulbasaur"));
+            pokebag.Pokemons.Add(pokedex.GetPokemonByName("Charizard"));
+            pokebag.Pokemons.Add(pokedex.GetPokemonByName("Mew"));
+            pokebag.Pokemons.Add(pokedex.GetPokemonByName("Dragonite"));
+
+            Pokedex bagdex = new Pokedex();
+            bagdex.Pokemons = pokebag.Pokemons;
+            reader.Save("bagdex", bagdex);
+            Pokedex loadDex = reader.Load("bagdex.xml");
+
+            foreach (Pokemon pokemon in loadDex.Pokemons)
+            {
+                Console.WriteLine(pokemon.Name);
+            }
 
             Console.ReadKey();
         }
