@@ -29,6 +29,9 @@ namespace Assignment5
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
 
+            PokemonBag pokemonBag = new PokemonBag();
+
+            //pokemonBag.Pokemons.Add(pokedex.GetPokemonByName())
 
 
             // TODO: Add item reader and print out all the items

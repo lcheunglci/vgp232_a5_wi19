@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,33 @@ namespace Assignment5.Data
         public PokemonBag()
         {
             Pokemons = new List<int>();
+        }
+
+        public void Save(string fileName)
+        {
+            using (var streamWriter = new StreamWriter(fileName))
+            {
+                var xmlSerializer = new XmlSerializer(typeof(List<int>));
+                xmlSerializer.Serialize(streamWriter, Pokemons);
+            }
+        }
+
+        public void Load(string filePath)
+        {
+            using (var file = new StreamReader(filePath))
+            {
+                var serializer = new XmlSerializer(typeof(List<int>));
+                try
+                {
+                    Pokemons.Clear();
+                    Pokemons.AddRange(serializer.Deserialize(file) as List<int>);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",
+                        filePath, ex.Message));
+                }
+            }
         }
     }
 }
