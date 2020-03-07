@@ -44,35 +44,9 @@ namespace Assignment5
                     new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 } }
             };
 
-            // TODO: move this into a inventory with a serialize and deserialize function.
+
             string inventoryFile = "inventory.xml";
-            using (var writer = XmlWriter.Create(inventoryFile))
-                (new XmlSerializer(typeof(Inventory))).Serialize(writer, source);
-
-            using (var invReader = new StreamReader(inventoryFile))
-            {
-                var serializer = new XmlSerializer(typeof(Inventory));
-                try
-                {
-                    Inventory inventory = serializer.Deserialize(invReader) as Inventory;
-                    if (inventory != null)
-                    {
-                        foreach (var item in inventory.ItemToQuantity)
-                        {
-                            Console.WriteLine("Item: {0} Quantity: {1}", item.Key, item.Value);
-                        }
-                    }
-                }
-
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Cannot load {0} due to the following {1}", 
-                        inventoryFile, ex.Message);
-                }
-
-            }
-
-
+           
             Console.ReadKey();
         }
     }
