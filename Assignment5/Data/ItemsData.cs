@@ -41,7 +41,6 @@ namespace Assignment5.Data
 
             return itemLevel;
 
-            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace Assignment5.Data
 
             return itemName;
           
-            throw new NotImplementedException();
+
         }
     }
 }

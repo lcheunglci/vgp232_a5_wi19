@@ -8,25 +8,20 @@ using System.Xml.Serialization;
 
 namespace Assignment5.Data
 {
-    class ItemReader
+    static public class ItemReader
     {
-        XmlSerializer serializer;
-
-        public ItemReader()
+        static public ItemsData Load(string filePath)
         {
-            serializer = new XmlSerializer(typeof(ItemsData));
-        }
-
-        public ItemsData Load(string filePath)
-        {
+         
             ItemsData itemsData = null;
             using (var file = new StreamReader(filePath))
             {
                 try
                 {
+                    var serializer = new XmlSerializer(typeof(ItemsData));
                     itemsData = serializer.Deserialize(file) as ItemsData;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",
                         filePath, ex.Message));
@@ -35,6 +30,5 @@ namespace Assignment5.Data
 
             return itemsData;
         }
-
     }
 }

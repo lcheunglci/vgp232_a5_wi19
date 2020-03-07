@@ -30,23 +30,42 @@ namespace Assignment5
             // and save it out and load it back and list it out.
 
             PokemonBag pokemonBag = new PokemonBag();
-
-            //pokemonBag.Pokemons.Add(pokedex.GetPokemonByName())
-
+            pokemonBag.Pokemons.Add(pokedex.GetPokemonByName("Bulbasur").Index);
+            pokemonBag.Pokemons.Add(pokedex.GetPokemonByName("Bulbasur").Index);
+            pokemonBag.Pokemons.Add(pokedex.GetPokemonByName("Charizard").Index);
+            pokemonBag.Pokemons.Add(pokedex.GetPokemonByName("Mew").Index);
+            pokemonBag.Pokemons.Add(pokedex.GetPokemonByName("Dragonite").Index);
 
             // TODO: Add item reader and print out all the items
+
+            ItemsData itemData = ItemReader.Load("itemData.xml");
+            foreach(var item in itemData.Items)
+            {
+                Console.WriteLine(item.Name);
+            }
 
             // TODO: hook up item data to display with the inventory
 
             var source = new Inventory()
             {
                 ItemToQuantity =
-                    new Dictionary<object, object> { { "Poke ball", 10 }, { "Potion", 10 } }
+                    new Dictionary<object, object> { }
             };
+
+            foreach(var item in itemData.Items)
+            {
+                source.ItemToQuantity.Add(item.Name, 10);
+            }
 
 
             string inventoryFile = "inventory.xml";
-           
+            Inventory inventory = new Inventory();
+            inventory = inventory.Deserialize(inventoryFile);
+            foreach (var item in inventory.Items)
+            {
+                Console.WriteLine(item.Value);
+            }
+            
             Console.ReadKey();
         }
     }

@@ -27,7 +27,21 @@ namespace Assignment5.Data
         public Pokemon GetPokemonByName(string name)
         {
             //return Pokemons.
-            throw new NotImplementedException();
+            Pokemon pokemonName = new Pokemon();
+            foreach(var pokemon in Pokemons)
+            {
+                if(pokemon.Name == name)
+                {
+                    pokemonName = pokemon;
+                    break;
+                }
+                else
+                {
+                    pokemonName = null;
+                }
+            }
+
+            return pokemonName;
         }
 
         List<Pokemon> GetPokemonsOfType(string type)
