@@ -29,6 +29,8 @@ namespace Assignment5
             // TODO: Add a pokemon bag with 2 bulbsaur, 1 charlizard, 1 mew and 1 dragonite
             // and save it out and load it back and list it out.
 
+
+
             // TODO: Add item reader and print out all the items
 
             // TODO: hook up item data to display with the inventory
