@@ -19,14 +19,29 @@ namespace Assignment5.Data
             Pokemons = new List<Pokemon>();
         }
 
-        Pokemon GetPokemonByIndex(int index)
+        public Pokemon GetPokemonByIndex(int index)
         {
             throw new NotImplementedException();
         }
 
-        Pokemon GetPokemonByName(string name)
+        public Pokemon GetPokemonByName(string name)
         {
-            throw new NotImplementedException();
+            //return Pokemons.
+            Pokemon pokemonName = new Pokemon();
+            foreach(var pokemon in Pokemons)
+            {
+                if(pokemon.Name == name)
+                {
+                    pokemonName = pokemon;
+                    break;
+                }
+                else
+                {
+                    pokemonName = null;
+                }
+            }
+
+            return pokemonName;
         }
 
         List<Pokemon> GetPokemonsOfType(string type)
@@ -35,22 +50,22 @@ namespace Assignment5.Data
             throw new NotImplementedException();
         }
 
-        Pokemon GetHighestHPPokemon()
+        public Pokemon GetHighestHPPokemon()
         {
             throw new NotImplementedException();
         }
 
-        Pokemon GetHighestAttackPokemon()
+        public Pokemon GetHighestAttackPokemon()
         {
             throw new NotImplementedException();
         }
 
-        Pokemon GetHighestDefensePokemon()
+        public Pokemon GetHighestDefensePokemon()
         {
             throw new NotImplementedException();
         }
 
-        Pokemon GetHighestMaxCPPokemon()
+        public Pokemon GetHighestMaxCPPokemon()
         {
             throw new NotImplementedException();
         }
