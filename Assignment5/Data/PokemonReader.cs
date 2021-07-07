@@ -41,13 +41,28 @@ namespace Assignment5.Data
                 }
                 catch (Exception ex)
                 {
-                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}",
-                        filepath, ex.Message));
+                    throw new Exception(string.Format("Unable to deserialize the {0} due to following: {1}", filepath, ex.Message));
                 }
             }
 
             return dex;
         }
 
+        public void Save(string fileName, Pokedex pokedex)
+        {
+            string outputFile = fileName + ".xml";
+            FileStream fs;
+            if (File.Exists(fileName))
+            {
+                fs = File.Open(outputFile, FileMode.Append);
+            }
+            else
+            {
+                fs = File.Open(outputFile, FileMode.Create);
+            }
+            XmlSerializer serializer = new XmlSerializer(typeof(Pokedex));
+            serializer.Serialize(fs, pokedex);
+            fs.Close();
+        }
     }
 }
